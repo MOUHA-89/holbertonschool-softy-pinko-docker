@@ -1,0 +1,27 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    image: my-frontend
+    expose:
+      - "9000"
+    # No ports section
+
+  backend:
+    build:
+      context: ./backend
+    image: my-backend
+    expose:
+      - "5252"
+    # No ports section
+
+  proxy:
+    build:
+      context: ./proxy
+    image: my-proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
